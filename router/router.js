@@ -6,7 +6,12 @@ const router = Router();
 
 
 router.get("/", verifyJwt, (req, res) =>{
-    res.send("Hello world");
+    try{
+        res.render("home");
+    }
+    catch(err){
+        res.status(500).json({ message: "Internal Server Error" });
+    }
 });
 
 

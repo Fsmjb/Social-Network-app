@@ -1,0 +1,47 @@
+header{
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: blue;
+    padding: 5px 0px;
+    z-index: 10;
+}
+
+.logo-div{
+    color: white;
+    font-size: 2em;
+    padding-left: 20px;
+}
+
+nav{
+    color: white;
+    font-size: 2em;
+}
+
+.login-div{
+    color: white;
+    font-size: 2em;
+    padding-right: 20px;
+}
+
+
+footer{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    background-color: rgb(56, 55, 55);
+    padding: 10px;
+}
+
+footer a{
+    color: rgb(240, 240, 240);
+}
+
+footer a:hover{
+    color: blue;
+}
