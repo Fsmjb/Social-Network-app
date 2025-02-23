@@ -1,0 +1,47 @@
+.login {
+    padding-top: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.login h2 {
+    font-size: 3em;
+    text-align: center;
+}
+
+
+form * {
+    display: block;
+    font-size: 20px;
+}
+
+form label {
+    margin-top: 10px;
+    margin-bottom: 2px;
+    padding-left: 10px
+}
+
+form input {
+    width: 320px;
+    height: 40px;
+    border-radius: 15px;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+
+button {
+    width: 120px;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    color: white;
+    background-color: rgb(66, 88, 212);
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: rgb(2, 13, 75);
+}

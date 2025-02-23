@@ -1,3 +1,31 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 header{
     position: fixed;
     width: 100%;
@@ -11,7 +39,7 @@ header{
     z-index: 10;
 }
 
-.logo-div{
+.logo-div a{
     color: white;
     font-size: 2em;
     padding-left: 20px;
@@ -23,9 +51,14 @@ nav{
 }
 
 .login-div{
-    color: white;
-    font-size: 2em;
     padding-right: 20px;
+}
+
+header button{
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
 }
 
 
@@ -45,3 +78,4 @@ footer a{
 footer a:hover{
     color: blue;
 }
+

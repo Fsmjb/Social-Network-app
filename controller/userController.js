@@ -5,21 +5,23 @@ import jwt from "jsonwebtoken";
 
 const userRegister = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        if (!name || !email || !password) {
+        const { name, email, password, username, about } = req.body;
+        if (!name || !email || !password || !username || !about) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
         const hash = await bcrypt.hash(password, 10);
         const createUser = new userModel({
             name,
+            username,
+            about,
             email,
             password: hash
         });
 
         await createUser.save();
 
-        const token = jwt.sign({ id: email }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ user: username }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
 
@@ -52,7 +54,7 @@ const userLogin = async (req, res) => {
             return res.status(401).json({ message: "invilad email or password" })
         }
 
-        const token = jwt.sign({ id: user.email }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
 
@@ -70,7 +72,61 @@ const userLogin = async (req, res) => {
     }
 }
 
+const user = async (req, res) => {
+    try {
+        const user = req.params.user;
+        const email = req.user.email;
+       
+        const data = await userModel.findOne({ username: user });
+        if (!data) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+        if(data.email == email){
+            res.redirect("/profile");
+        }
+        return res.render("user", { data: data });
+
+    }
+    catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+
+const createPost = async (req, res) => {
+    try {
+
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const profile = async(req, res) =>{
+    try {
+        const email = req.user.email
+        const data = await userModel.findOne({email : email});
+        if (!data) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+        return res.render("profile", { data: data });
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const logout = async(req, res) =>{
+    try {
+        res.cookie("token", "");
+        res.redirect("/login");
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
 export {
     userRegister,
-    userLogin
+    userLogin,
+    user, 
+    profile,
+    logout
 }

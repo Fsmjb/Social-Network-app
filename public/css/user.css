@@ -31,13 +31,21 @@ body {
     position: absolute;
     top: 50%;
     left: 10%;
-    text-align: center;
 }
 
 #profile-pic {
     border-radius: 50%;
     height: 250px;
     width: 200px;
+}
+
+.follower{
+    text-align: center;
+}
+.follower button{
+    height: 25px;
+    border-radius: 15px;
+    border: none;
 }
 
 .profile-details {

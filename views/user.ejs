@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/user.css">
+</head>
+<body>
+    <%-include("./partial/header") %>
+    <main>
+       <section class="profile">
+        <div class="bg-img-div"></div>
+
+        <div class="profile-pic">
+            <img src="/img/<%=data.imgUrl%>" alt="profile pic" id="profile-pic">
+            <% let follower = data.followers.length %>
+            <% let following = data.following.length %>
+            
+            <p class="follower"><button><%=follower%> Follower </button><button><%=following%> Following</button></p>
+            
+        </div>
+        <div class="profile-details">
+            <div>
+                <span id="profile-name"><%=data.name %></span>
+            </div>
+            <div >
+                <p id="about"><%=data.about %>.</p>
+            </div>
+            <div class="profile-button">
+                <button class="profile-button-item">Message</button>
+                <button class="profile-button-item">Follow</button>
+            </div>
+        </div>
+       </section>
+        
+    </main>
+    <%-include("./partial/footer") %>
+    
+</body>
+</html>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/user.css">
 </head>
 <body>
     <%-include("./partial/header") %>
@@ -14,22 +14,23 @@
         <div class="bg-img-div"></div>
 
         <div class="profile-pic">
-            <img src="img/db.png" alt="profile pic" id="profile-pic">
-            <p id="follower"><span id="follower-count">3k</span> Follower</p>
+            <img src="/img/<%=data.imgUrl%>" alt="profile pic" id="profile-pic">
+            <% let follower = data.followers.length %>
+            <% let following = data.following.length %>
+            
+            <p class="follower"><button><%=follower%> Follower </button><button><%=following%> Following</button></p>
+            
         </div>
         <div class="profile-details">
             <div>
-                <span id="profile-name">Muhammad Khan</span>
+                <span id="profile-name"><%=data.name %></span>
             </div>
             <div >
-                <p id="about">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit doloremque asperiores repellat dolores et maiores.</p>
-            </div>
-            <div class="profile-button">
-                <button class="profile-button-item">Message</button>
-                <button class="profile-button-item">Follow</button>
+                <p id="about"><%=data.about %>.</p>
             </div>
         </div>
        </section>
+        
     </main>
     <%-include("./partial/footer") %>
     

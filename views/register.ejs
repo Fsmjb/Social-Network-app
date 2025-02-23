@@ -4,21 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registor</title>
+    <!-- <link rel="stylesheet" href="/css/header.css"> -->
+    <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
-    <div>
-        <form action="/reg/submit" method="POST" id="form">
-            <label>name</label>
-            <input type="text" name="name" required>
-            <label>email</label>
-            <input type="emai" name="email" required>
-            <label>password</label>
-            <input type="password" name="password" required id="password">
+    <!-- <%-include("./partial/header") %> -->
+    <div class="register">
+        <form action="/reg/submit" method="POST" id="form" >
+            <h2>Registor</h2>
+            <label>Name</label>
+            <input type="text" name="name" required> <br>
+            <label >Username</label>
+            <input type="text" name="username"  required> <br>
+            <label>Email</label>
+            <input type="emai" name="email" required> <br>
+            <label >About</label>
+            <input type="text" name="about" required> <br>
+            <label>Password</label>
+            <input type="password" name="password" required id="password"> <br>
             <label>Conform password</label>
-            <input type="password"  required id="conform_password">
+            <input type="password"  required id="conform_password"> <br>
             <button type="submit" id="button">Registor</button>
         </form>
     </div>
+    <!-- <%-include("./partial/footer") %> -->
     <script src="/js/register.js"></script>
 </body>
 </html>
