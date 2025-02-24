@@ -4,7 +4,10 @@ import verifyJwt from "../middleware/jwtVerify.js";
 import { user, profile } from "../controller/userController.js";
 import { logout, follow } from "../controller/userController.js";
 import { unfollow } from "../controller/userController.js";
-import upload from "../middleware/multer.js"
+import upload from "../middleware/multer.js";
+// post import
+
+import { newPost } from "../controller/postController.js";
 
 const router = Router();
 
@@ -39,6 +42,13 @@ router.post("/login/submit", userLogin);
 router.get("/profile",verifyJwt, profile);
 
 router.get("/user/:user/follow", verifyJwt, follow );
-router.get("/user/:user/unfollow", verifyJwt, unfollow );
+router.get("/user/:user/unfollow", verifyJwt,   unfollow );
+
+
+// post router 
+
+
+router.post("/post/new", verifyJwt, upload.single("image"), newPost);
+
 
 export default router;

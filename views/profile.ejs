@@ -30,6 +30,21 @@
             </div>
         </div>
        </section>
+       <section class="post-section">
+        <div>
+            <form action="/post/new" method="POST" enctype="multipart/form-data">
+                <h3>Create Post</h3>
+                <textarea name="text"></textarea>
+                <div class="img-div">
+                    <label >Select image :  </label>
+                    <input type="file" name="image">
+                </div>
+                <button type="submit">Post</button>
+            </form>
+        </div>
+       </section>
+
+       <section class="space"></section>
         
     </main>
     <%-include("./partial/footer") %>
