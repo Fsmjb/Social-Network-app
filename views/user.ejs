@@ -29,8 +29,7 @@
                 <p id="about"><%=data.about %>.</p>
             </div>
             <div class="profile-button">
-                <button class="profile-button-item">Message</button>
-                <button class="profile-button-item">Follow</button>
+                <a href="/user/<%=data.username%>/<%=follow %>"><button class="profile-button-item"><%=follow %></button></a>
             </div>
         </div>
        </section>

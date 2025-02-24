@@ -37,7 +37,7 @@ const userRegister = async (req, res) => {
     } catch (err) {
         return res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};
 
 const userLogin = async (req, res) => {
     try {
@@ -54,7 +54,7 @@ const userLogin = async (req, res) => {
             return res.status(401).json({ message: "invilad email or password" })
         }
 
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ user: user.username }, process.env.JWT_SECRET, {
             expiresIn: "1h",
         });
 
@@ -70,21 +70,26 @@ const userLogin = async (req, res) => {
     catch (err) {
         return res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};
 
 const user = async (req, res) => {
     try {
         const user = req.params.user;
-        const email = req.user.email;
-       
+        const user1 = req.user.user;
+        let status = "Follow";
         const data = await userModel.findOne({ username: user });
+        const data2 = await userModel.findOne({ username: user1 });
+        if (user == user1) {
+            return res.redirect("/profile");
+        }
         if (!data) {
             return res.status(400).json({ message: "User does not exist" });
         }
-        if(data.email == email){
-            res.redirect("/profile");
+
+        if(data.followers.includes(data2._id)){
+            status = "UnFollow";
         }
-        return res.render("user", { data: data });
+        return res.render("user", { data: data, follow : status });
 
     }
     catch (err) {
@@ -101,10 +106,10 @@ const createPost = async (req, res) => {
     }
 };
 
-const profile = async(req, res) =>{
+const profile = async (req, res) => {
     try {
-        const email = req.user.email
-        const data = await userModel.findOne({email : email});
+        const user = req.user.user;
+        const data = await userModel.findOne({ username: user });
         if (!data) {
             return res.status(400).json({ message: "User does not exist" });
         }
@@ -114,19 +119,93 @@ const profile = async(req, res) =>{
     }
 };
 
-const logout = async(req, res) =>{
+const logout = async (req, res) => {
     try {
         res.cookie("token", "");
         res.redirect("/login");
     } catch (err) {
         return res.status(500).json({ message: "Internal Server Error" });
     }
-}
+};
+
+const follow = async (req, res) => {
+    try {
+        const userToFollow = req.params.user;
+        const user1 = req.user.user;
+
+        const userToFollowDoc = await userModel.findOne({ username: userToFollow });
+        if (!userToFollowDoc) {
+            return res.status(400).json({ message: "User to follow does not exist" });
+        }
+
+        const currentUserDoc = await userModel.findOne({ username: user1 });
+        if (!currentUserDoc) {
+            return res.status(400).json({ message: "Current user does not exist" });
+        }
+
+        if (currentUserDoc.following.includes(userToFollowDoc._id)) {
+            return res.status(400).json({ message: "You are already following this user" });
+        }
+
+        
+        if(userToFollowDoc.followers.includes(currentUserDoc._id)){
+            return res.status(400).json({ message: "You are already following this user" });
+        }
+
+        currentUserDoc.following.push(userToFollowDoc._id);
+        await currentUserDoc.save();
+
+        userToFollowDoc.followers.push(currentUserDoc._id);
+        await userToFollowDoc.save();
+
+        return res.redirect(`/user/${userToFollow}`);
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const unfollow = async (req, res) => {
+    try {
+        const userToFollow = req.params.user;
+        const user1 = req.user.user;
+
+        const userToFollowDoc = await userModel.findOne({ username: userToFollow });
+        if (!userToFollowDoc) {
+            return res.status(400).json({ message: "User to follow does not exist" });
+        }
+
+        const currentUserDoc = await userModel.findOne({ username: user1 });
+        if (!currentUserDoc) {
+            return res.status(400).json({ message: "Current user does not exist" });
+        }
+
+        if (!currentUserDoc.following.includes(userToFollowDoc._id)) {
+            return res.status(400).json({ message: "You to follow does not exist" });
+        }
+
+        
+        if(!userToFollowDoc.followers.includes(currentUserDoc._id)){
+            return res.status(400).json({ message: "Current user does not exist" });
+        }
+
+        currentUserDoc.following.pull(userToFollowDoc._id);
+        await currentUserDoc.save();
+
+        userToFollowDoc.followers.pull(currentUserDoc._id);
+        await userToFollowDoc.save();
+
+        return res.redirect(`/user/${userToFollow}`);
+    } catch (err) {
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+};
 
 export {
     userRegister,
     userLogin,
-    user, 
+    user,
     profile,
-    logout
+    logout,
+    follow,
+    unfollow
 }

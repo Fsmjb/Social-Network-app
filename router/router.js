@@ -2,7 +2,8 @@ import { Router } from "express";
 import { userRegister, userLogin } from "../controller/userController.js";
 import verifyJwt from "../middleware/jwtVerify.js";
 import { user, profile } from "../controller/userController.js";
-import { logout } from "../controller/userController.js";
+import { logout, follow } from "../controller/userController.js";
+import { unfollow } from "../controller/userController.js";
 import upload from "../middleware/multer.js"
 
 const router = Router();
@@ -36,5 +37,8 @@ router.post("/login/submit", userLogin);
 
 // router.get("/user/post/", )
 router.get("/profile",verifyJwt, profile);
+
+router.get("/user/:user/follow", verifyJwt, follow );
+router.get("/user/:user/unfollow", verifyJwt, unfollow );
 
 export default router;
