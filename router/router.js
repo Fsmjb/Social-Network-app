@@ -7,7 +7,8 @@ import { unfollow } from "../controller/userController.js";
 import upload from "../middleware/multer.js";
 // post import
 
-import { newPost } from "../controller/postController.js";
+import { newPost, likePost } from "../controller/postController.js";
+import {  unLikePost } from "../controller/postController.js";
 
 const router = Router();
 
@@ -47,8 +48,9 @@ router.get("/user/:user/unfollow", verifyJwt,   unfollow );
 
 // post router 
 
-
 router.post("/post/new", verifyJwt, upload.single("image"), newPost);
+router.get("/post/like/:user/:id", verifyJwt, likePost);
+router.get("/post/unlike/:user/:id", verifyJwt, unLikePost);
 
 
 export default router;

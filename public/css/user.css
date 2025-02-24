@@ -117,6 +117,89 @@ body {
     border: 1px solid black;
 }
 
+.display-section{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.display-section .post-div{
+    width: 700px;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    border: 5px solid rgba(0, 0, 0, 0.4);
+    box-shadow:  1px 4px rgb(19, 63, 99);
+}
+
+
+.display-section .post-div img{
+   width: 100%;
+}
+
+.display-section .like-div{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}  
+
+.display-section .like-div button{
+    border: none;
+    box-shadow: 1px 2px gray;
+    min-width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+.comment-btn{
+    padding: 5px 15px;
+    
+}
+
+.create-comment-div{
+    width: 100%;
+    border: none;
+    border: 5px solid rgba(7, 6, 54, 0.4);
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.create-comment-div textarea{
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.create-comment-div button{
+    width: 80%;
+    height: 30px;
+    margin-top: 8px;
+    border-radius: 15px;
+    box-shadow: 1px 3px gray;
+    font-size: 16px;
+}
+.create-comment-div button:hover{
+    background-color: blue;
+    color: white;
+}
+
+.display-section .like-div button:hover{
+  background-color: rgb(35, 24, 83);
+  color: white;
+}
+
+.bg-blue{
+    background-color: blue;
+    color: white;
+}
+
 
 .space {
     min-height: 80px;
@@ -132,6 +215,9 @@ body {
     .post-section form textarea{
         width: 600px;
     }
+    .display-section .post-div{
+        width: 600px;
+    }
 }
 
 @media (max-width: 850px){
@@ -144,7 +230,11 @@ body {
     .post-section form textarea{
         width: 500px;
     }
+    .display-section .post-div{
+        width: 500px;
+    }
 }
+
 
 @media (max-width: 550px){
     .profile-details {
@@ -153,8 +243,13 @@ body {
         left: 10%;
         width: auto;
     }
+
     .post-section form textarea{
-        width: 100%;
+        margin-top: 300px;
+        width: 90%;
         
+    }
+    .display-section .post-div{
+        width: 90%;
     }
 }

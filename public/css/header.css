@@ -63,7 +63,7 @@ header button{
 
 
 footer{
-    position: absolute;
+    position: fixed;
     width: 100%;
     text-align: center;
     bottom: 0;

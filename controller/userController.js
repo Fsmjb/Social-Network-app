@@ -1,6 +1,7 @@
 import { userModel } from "../model/usermodel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { postModle } from "../model/postModel.js";
 
 
 const userRegister = async (req, res) => {
@@ -77,8 +78,11 @@ const user = async (req, res) => {
         const user = req.params.user;
         const user1 = req.user.user;
         let status = "Follow";
+
         const data = await userModel.findOne({ username: user });
         const data2 = await userModel.findOne({ username: user1 });
+        const post = await postModle.find({user : user});
+
         if (user == user1) {
             return res.redirect("/profile");
         }
@@ -89,7 +93,7 @@ const user = async (req, res) => {
         if(data.followers.includes(data2._id)){
             status = "UnFollow";
         }
-        return res.render("user", { data: data, follow : status });
+        return res.render("user", { data: data, follow : status, post : post, user : user1});
 
     }
     catch (err) {
@@ -109,11 +113,14 @@ const createPost = async (req, res) => {
 const profile = async (req, res) => {
     try {
         const user = req.user.user;
+        const user1 = req.user.user;
         const data = await userModel.findOne({ username: user });
+        const post = await postModle.find({user : user});
+        
         if (!data) {
             return res.status(400).json({ message: "User does not exist" });
         }
-        return res.render("profile", { data: data });
+        return res.render("profile", { data: data, post : post, user : user1 });
     } catch (err) {
         return res.status(500).json({ message: "Internal Server Error" });
     }

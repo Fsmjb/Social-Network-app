@@ -44,6 +44,44 @@
         </div>
        </section>
 
+       <section class="display-section">
+        <% let name = data.name %>
+        <% if(locals.post){ %>
+            <%post.forEach(function(data){%>
+              
+                <div class="post-div">
+                    <h3><%=data.user %></h3>
+                    <div>
+                        <p>
+                            <%=data.body %>
+                            
+                        </p>
+                        <% if(!(data.imgUrl) == ""){ %>
+                        <img src="/productimage/<%=data.imgUrl %>"  >
+                        <% } %>
+                    </div>
+                    <div class="like-div">
+                        <% if(data.likes.includes(user)) {%>
+                            <a href="/post/unlike/<%=name %>/<%=data._id %>"><button class="bg-blue">Like :  <%=data.likes.length %> </button></a>
+                        <% } else{%>
+                       <a href="/post/like/<%=name %>/<%=data._id %>"><button>Like :  <%=data.likes.length %> </button></a>
+                       <% } %>
+                        <button class="comment-btn" >comment : <%=data.comments.length %></button>
+                    </div>
+                    <div class="comment-div">
+                        <div class="create-comment-div">
+                            <form action="/post/comment/<%=name%>/<%=data._id %>" method="POSt">
+                                <h3>Craete Comment</h3>
+                                <textarea name="body"></textarea>
+                                <button type="submit">Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+        <% }) } %>
+       </section>
+
        <section class="space"></section>
         
     </main>
