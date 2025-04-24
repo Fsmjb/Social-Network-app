@@ -45,7 +45,7 @@ A full-stack social networking platform built with **Node.js, Express, MongoDB (
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/social-network-app.git
+   git clone https://github.com/Fsmjb/Social-Network-app.git
    cd social-network-app
    ```
 
