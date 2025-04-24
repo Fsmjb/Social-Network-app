@@ -73,8 +73,33 @@ const unLikePost = async (req, res) => {
 };
 
 
+const comment = async(req, res)=>{
+    try{
+        const commentID = req.params.id;
+        const user = req.user.user;
+        const user1 = req.params.user;
+        const {body} = req.body;
+
+        const postToComment = await postModle.findOne({ _id: commentID});
+       
+        if (!postToComment.comments) {
+            postToComment.comments = [];
+        }
+        postToComment.comments.push( {
+            body : body,
+            user : user
+        });
+        await postToComment.save();
+        return res.redirect(`/user/${user1}#${commentID}`);
+    }
+    catch(err){
+        return res.status(500).json({ message: "Internal Server Error" });
+    }
+}
+
 export {
 newPost,
 likePost,
-unLikePost
+unLikePost,
+comment
 }
