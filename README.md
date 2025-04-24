@@ -73,11 +73,6 @@ JWT_SECRET = your jwt key
 
 ---
 
-## 🔍 Screenshots *(Optional)*  
-
-*(Add screenshots of key pages like the feed, profile, and post creation.)*  
-
----
 
 ## 🌟 Future Improvements  
 
